@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">VietTest</string>
+    <string name="vocab_word">Vocab</string>
 </resources>

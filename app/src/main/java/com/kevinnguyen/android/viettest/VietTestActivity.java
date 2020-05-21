@@ -1,18 +1,18 @@
 package com.kevinnguyen.android.viettest;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class VietTestActivity extends AppCompatActivity {
-    ImageButton mSoundButton;
-    TextToSpeech mTextToSpeech;
     private static final String TAG = "VietTestActivity";
+    TextToSpeech mTextToSpeech;
     Locale mVietLocale;
+    WordList mWordList;
+    List<Vocabulary> mVocabularyList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +31,16 @@ public class VietTestActivity extends AppCompatActivity {
             }
         });
 
-        mSoundButton = findViewById(R.id.sound_icon);
-        mSoundButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                speak();
-            }
-        });
+        mWordList = new WordList();
+        mVocabularyList = mWordList.readCSV(this);
+
+        for(Vocabulary x : mVocabularyList) {
+            Log.d(TAG, " " + x);
+        }
     }
 
     private void speak() {
-        String text = "trời ơi";
+        String text = "đụ má";
         mTextToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 }

@@ -1,6 +1,4 @@
 package com.kevinnguyen.android.viettest;
-
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class VocabListFragment extends Fragment {
     private RecyclerView mVocabRecyclerView;
+
+    public static Fragment newInstance() {
+        return new VocabListFragment();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,10 +29,12 @@ public class VocabListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.vocab_fragment, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.list_vocab_recycler_view, container, false);
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
-        mVocabRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mVocabRecyclerView.setAdapter(new VocabAdapter(new WordList().readCSV(getActivity())));
         return view;
     }
 
@@ -44,7 +51,34 @@ public class VocabListFragment extends Fragment {
         }
 
         public void bindData(Vocabulary vocabulary) {
+            mVocabText.setText(vocabulary.getWord());
+            mTranslation.setText(vocabulary.getTranslation());
+            mSoundButton.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_sound));
+        }
+    }
 
+    private class VocabAdapter extends RecyclerView.Adapter<VocabHolder> {
+        private List<Vocabulary> mVocabList;
+
+        public VocabAdapter(List<Vocabulary> vocab) {
+            mVocabList = vocab;
+        }
+
+        @NonNull
+        @Override
+        public VocabHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(getActivity());
+            return new VocabHolder(inflater, parent);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull VocabHolder holder, int position) {
+            holder.bindData(mVocabList.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return mVocabList.size();
         }
     }
 }

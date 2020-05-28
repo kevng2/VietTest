@@ -32,7 +32,7 @@ public class VocabListFragment extends Fragment {
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-
+                    mTextToSpeech.setLanguage(new Locale("vi_VN"));
                 }
             }
         });
@@ -63,7 +63,7 @@ public class VocabListFragment extends Fragment {
             mSoundButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "Poop", Toast.LENGTH_SHORT).show();
+                    speak();
                 }
             });
         }
@@ -74,7 +74,10 @@ public class VocabListFragment extends Fragment {
             mSoundButton.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_sound));
         }
 
-
+        public void speak() {
+            String toSpeak = mVocabText.getText().toString();
+            mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+        }
     }
 
     private class VocabAdapter extends RecyclerView.Adapter<VocabHolder> {

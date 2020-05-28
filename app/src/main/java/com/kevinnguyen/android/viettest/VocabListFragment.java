@@ -1,22 +1,25 @@
 package com.kevinnguyen.android.viettest;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class VocabListFragment extends Fragment {
     private RecyclerView mVocabRecyclerView;
+    private TextToSpeech mTextToSpeech;
 
     public static Fragment newInstance() {
         return new VocabListFragment();
@@ -25,6 +28,14 @@ public class VocabListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTextToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status != TextToSpeech.ERROR) {
+
+                }
+            }
+        });
     }
 
     @Nullable
@@ -48,6 +59,13 @@ public class VocabListFragment extends Fragment {
             mVocabText = itemView.findViewById(R.id.vocab_text);
             mTranslation = itemView.findViewById(R.id.translation_text);
             mSoundButton =  itemView.findViewById(R.id.sound_button);
+
+            mSoundButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), "Poop", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         public void bindData(Vocabulary vocabulary) {
@@ -55,6 +73,8 @@ public class VocabListFragment extends Fragment {
             mTranslation.setText(vocabulary.getTranslation());
             mSoundButton.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_sound));
         }
+
+
     }
 
     private class VocabAdapter extends RecyclerView.Adapter<VocabHolder> {

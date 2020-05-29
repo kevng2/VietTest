@@ -11,11 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordList {
+public class FileUtil {
     private static final String TAG = "WordList";
-    List<Vocabulary> wordList = new ArrayList<>();
 
-    public List<Vocabulary> readCSV(Context context) {
+    public static List<Vocabulary> readCSV(Context context) {
+        List<Vocabulary> wordList = new ArrayList<>();
         InputStream is = context.getResources().openRawResource(R.raw.chapter_1);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
@@ -23,6 +23,7 @@ public class WordList {
         try {
             while ((line = reader.readLine()) != null) {
                 String[] words = line.split(",");
+                words[1] = words[1].replace("\"", "");
                 wordList.add(new Vocabulary(words[0], words[1]));
             }
         }

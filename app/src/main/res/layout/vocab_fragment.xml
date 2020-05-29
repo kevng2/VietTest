@@ -11,6 +11,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="start"
+        android:textSize="16sp"
+        android:textStyle="bold"
         android:text="@string/vocab_word"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

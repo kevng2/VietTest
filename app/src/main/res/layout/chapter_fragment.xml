@@ -23,8 +23,13 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/chapter_image"
+                android:contentDescription="@string/chapter_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:layout_centerInParent="true"
                 android:src="@drawable/rick_and_morty"
                 app:layout_constraintBottom_toTopOf="@+id/chapter_button"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,9 +1,5 @@
 package com.kevinnguyen.android.viettest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Canvas;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,16 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 
-import java.io.File;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -49,34 +46,34 @@ public class ChapterFragment extends Fragment {
         return view;
     }
 
-    private class ChapterHolder extends RecyclerView.ViewHolder {
+    private class ChapterHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private static final String TAG = "ChapterHolder";
-        private Button mChapterButton;
         private ImageView mImageView ;
+        private TextView mChapterTitle;
 
         public ChapterHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.chapter_fragment, parent, false));
-            mChapterButton = itemView.findViewById(R.id.chapter_button);
             mImageView = itemView.findViewById(R.id.chapter_image);
-            mChapterButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getActivity(), VocabListActivity.class);
-                    startActivity(intent);
-                }
-            });
+            mChapterTitle = itemView.findViewById(R.id.chapter_title);
+            itemView.setOnClickListener(this);
         }
 
         public void bindChapter(String text, int chapter) {
-            mChapterButton.setText(text);
+            mChapterTitle.setText(text);
             String chapterStr = "chapter" + (chapter + 1);
-            int drawable = Objects.requireNonNull(getActivity()).getResources().getIdentifier(chapterStr, "drawable",
-                    getActivity().getPackageName());
+            int drawable = Objects.requireNonNull(getActivity()).getResources()
+                    .getIdentifier(chapterStr, "drawable", getActivity().getPackageName());
             Log.d(TAG, "bindChapter: " + drawable);
             Drawable image = getActivity().getResources().getDrawable(drawable);
             Glide.with(getActivity())
                     .load(image)
                     .into(mImageView);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), VocabListActivity.class);
+            startActivity(intent);
         }
     }
 

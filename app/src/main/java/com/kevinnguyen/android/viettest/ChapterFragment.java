@@ -6,14 +6,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,22 +54,24 @@ public class ChapterFragment extends Fragment {
         private static final String TAG = "ChapterHolder";
         private ImageView mImageView ;
         private TextView mChapterTitle;
+        private CardView mCardView;
 
         public ChapterHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.chapter_fragment, parent, false));
             mImageView = itemView.findViewById(R.id.chapter_image);
             mChapterTitle = itemView.findViewById(R.id.chapter_title);
+            mCardView = itemView.findViewById(R.id.cardView);
             itemView.setOnClickListener(this);
         }
 
         public void bindChapter(String text, int chapter) {
-            Log.d(TAG, "bindChapter: " + text);
+            YoYo.with(Techniques.FadeIn)
+                    .playOn(mCardView);
             int stringResource = getActivity().getResources().getIdentifier(text, "string", getActivity().getPackageName());
             mChapterTitle.setText(getActivity().getResources().getString(stringResource));
             String chapterStr = "chapter" + (chapter + 1);
             int drawable = Objects.requireNonNull(getActivity()).getResources()
                     .getIdentifier(chapterStr, "drawable", getActivity().getPackageName());
-            Log.d(TAG, "bindChapter: " + drawable);
             Drawable image = getActivity().getResources().getDrawable(drawable);
             Glide.with(getActivity())
                     .load(image)
@@ -69,6 +80,20 @@ public class ChapterFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
+            Log.d(TAG, "onClick: ");
+            YoYo.YoYoString animation = YoYo.with(Techniques.Pulse)
+                    .playOn(mCardView);
+            /*
+            while(animation.isRunning()) {
+                try {
+                    Thread.sleep(20);
+                }
+                catch(InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+             */
+
             Intent intent = new Intent(getActivity(), VocabListActivity.class);
             startActivity(intent);
         }
@@ -77,6 +102,7 @@ public class ChapterFragment extends Fragment {
     private class ChapterAdapter extends RecyclerView.Adapter<ChapterHolder> {
         private static final String TAG = "ChapterAdapter";
         List<String> mChapter;
+        private CardView mCardView;
 
         public ChapterAdapter() {
             mChapter = new ArrayList<>(10);

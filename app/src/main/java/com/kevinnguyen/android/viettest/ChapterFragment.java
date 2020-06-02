@@ -80,22 +80,19 @@ public class ChapterFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Log.d(TAG, "onClick: ");
             YoYo.YoYoString animation = YoYo.with(Techniques.Pulse)
+                    .duration(200)
                     .playOn(mCardView);
-            /*
-            while(animation.isRunning()) {
-                try {
-                    Thread.sleep(20);
-                }
-                catch(InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-             */
 
-            Intent intent = new Intent(getActivity(), VocabListActivity.class);
-            startActivity(intent);
+            // Delay the the switch to a new activity until the animation is done
+            itemView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "Running run()");
+                    Intent intent = new Intent(getActivity(), VocabListActivity.class);
+                    startActivity(intent);
+                }
+            }, 200);
         }
     }
 

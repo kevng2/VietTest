@@ -2,8 +2,11 @@
     <string name="app_name">VietTest</string>
     <string name="vocab_word">Vocab Word</string>
     <string name="translation">Translation</string>
+    <string name="vocabulary">Vocabulary</string>
+    <string name="definition">Definition</string>
     <string name="sound_icon_description">Read Word</string>
     <string name="chapter_image">Chapter Image</string>
+    <string name="chapter_name">Name of Chapter</string>
     <string name="chapter1">Chapter 1: Greetings</string>
     <string name="chapter2">Chapter 2: Getting Acquainted</string>
     <string name="chapter3">Chapter 3: Language, nationality</string>

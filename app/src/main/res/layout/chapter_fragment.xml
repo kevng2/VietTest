@@ -4,19 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:id="@+id/chapter_card_view">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardUseCompatPadding="true"
-        card_view:cardMaxElevation="5dp"
-        card_view:cardElevation="2dp"
+        app:cardCornerRadius="5dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:foreground="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -31,7 +30,7 @@
 
             <ImageView
                 android:id="@+id/chapter_image"
-                android:layout_width="394dp"
+                android:layout_width="match_parent"
                 android:layout_height="156dp"
                 android:layout_centerInParent="true"
                 android:adjustViewBounds="true"
@@ -44,14 +43,16 @@
 
             <TextView
                 android:id="@+id/chapter_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Test Title"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/chapter_name"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chapter_image" />
         </androidx.constraintlayout.widget.ConstraintLayout>

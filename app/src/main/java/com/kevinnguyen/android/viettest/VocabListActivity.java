@@ -1,10 +1,17 @@
 package com.kevinnguyen.android.viettest;
 
+import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 
 public class VocabListActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        return VocabListFragment.newInstance();
+        String chapterTitle = getIntent().getStringExtra(ChapterFragment.CHAPTER_TITLE);
+        Bundle args = new Bundle();
+        args.putString(ChapterFragment.CHAPTER_TITLE, chapterTitle);
+        VocabListFragment vocabListFragment = VocabListFragment.newInstance();
+        vocabListFragment.setArguments(args);
+        return vocabListFragment;
     }
 }

@@ -1,6 +1,7 @@
 package com.kevinnguyen.android.viettest;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,14 +18,19 @@ import java.util.Locale;
 public class VocabListFragment extends Fragment {
     private RecyclerView mVocabRecyclerView;
     private TextToSpeech mTextToSpeech;
+    private String mTextTitle;
+    private TextView mTextViewTitle;
+    private static final String TAG = "VocabListFragment";
 
-    public static Fragment newInstance() {
+    public static VocabListFragment newInstance() {
         return new VocabListFragment();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mTextTitle = getArguments().getString(ChapterFragment.CHAPTER_TITLE);
+        Log.d(TAG, "onCreate: " + mTextTitle);
         mTextToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -45,7 +51,10 @@ public class VocabListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: " + mTextTitle);
         View view = inflater.inflate(R.layout.list_vocab_recycler_view, container, false);
+        mTextViewTitle = view.findViewById(R.id.chapter_list_title);
+        mTextViewTitle.setText(mTextTitle);
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVocabRecyclerView.setAdapter(new VocabAdapter(FileUtil.readCSV(getActivity())));

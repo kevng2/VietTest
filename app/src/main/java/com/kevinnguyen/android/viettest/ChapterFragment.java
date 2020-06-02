@@ -6,11 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -20,15 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class ChapterFragment extends Fragment {
     private RecyclerView mRecyclerView;
+    public static final String CHAPTER_TITLE = "requestChapterNumber";
 
     public static Fragment newInstance() {
         return new ChapterFragment();
@@ -52,9 +48,10 @@ public class ChapterFragment extends Fragment {
 
     private class ChapterHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private static final String TAG = "ChapterHolder";
-        private ImageView mImageView ;
+        private ImageView mImageView;
         private TextView mChapterTitle;
         private CardView mCardView;
+        private String mTitleText;
 
         public ChapterHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.chapter_fragment, parent, false));
@@ -90,6 +87,7 @@ public class ChapterFragment extends Fragment {
                 public void run() {
                     Log.d(TAG, "Running run()");
                     Intent intent = new Intent(getActivity(), VocabListActivity.class);
+                    intent.putExtra(CHAPTER_TITLE, mChapterTitle.getText().toString());
                     startActivity(intent);
                 }
             }, 200);

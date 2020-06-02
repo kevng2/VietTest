@@ -6,19 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -59,7 +54,9 @@ public class ChapterFragment extends Fragment {
         }
 
         public void bindChapter(String text, int chapter) {
-            mChapterTitle.setText(text);
+            Log.d(TAG, "bindChapter: " + text);
+            int stringResource = getActivity().getResources().getIdentifier(text, "string", getActivity().getPackageName());
+            mChapterTitle.setText(getActivity().getResources().getString(stringResource));
             String chapterStr = "chapter" + (chapter + 1);
             int drawable = Objects.requireNonNull(getActivity()).getResources()
                     .getIdentifier(chapterStr, "drawable", getActivity().getPackageName());
@@ -99,7 +96,7 @@ public class ChapterFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ChapterHolder holder, int position) {
             Log.d(TAG, "onBindViewHolder: " + position);
-            holder.bindChapter("Chapter " + mChapter.get(position), position);
+            holder.bindChapter("chapter" + mChapter.get(position), position);
         }
 
         @Override

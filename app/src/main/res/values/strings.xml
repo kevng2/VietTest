@@ -4,14 +4,14 @@
     <string name="translation">Translation</string>
     <string name="sound_icon_description">Read Word</string>
     <string name="chapter_image">Chapter Image</string>
-    <string name="chapter_1">Chapter 1: Greetings</string>
-    <string name="chapter_2">Chapter 2: Getting Acquainted</string>
-    <string name="chapter_3">Chapter 3: Language, nationality</string>
-    <string name="chapter_4">Chapter 4: Address System</string>
-    <string name="chapter_5">Chapter 5: Year, month, week, day, days of the week, dates</string>
-    <string name="chapter_6">Chapter 6: Time</string>
-    <string name="chapter_7">Chapter 7: Introductions; the family</string>
-    <string name="chapter_8">Chapter 8: In the classroom</string>
-    <string name="chapter_9">Chapter 9: Weekend, entertainment, sports</string>
-    <string name="chapter_10">Chapter 10: Asking directions</string>
+    <string name="chapter1">Chapter 1: Greetings</string>
+    <string name="chapter2">Chapter 2: Getting Acquainted</string>
+    <string name="chapter3">Chapter 3: Language, nationality</string>
+    <string name="chapter4">Chapter 4: Address System</string>
+    <string name="chapter5">Chapter 5: Year, month, week, day, days of the week, dates</string>
+    <string name="chapter6">Chapter 6: Time</string>
+    <string name="chapter7">Chapter 7: Introductions; the family</string>
+    <string name="chapter8">Chapter 8: In the classroom</string>
+    <string name="chapter9">Chapter 9: Weekend, entertainment, sports</string>
+    <string name="chapter10">Chapter 10: Asking directions</string>
 </resources>

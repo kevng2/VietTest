@@ -1,8 +1,12 @@
 package com.kevinnguyen.android.viettest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -29,6 +33,7 @@ public class VocabListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         mTextTitle = getArguments().getString(ChapterFragment.CHAPTER_TITLE);
         Log.d(TAG, "onCreate: " + mTextTitle);
         mTextToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
@@ -59,6 +64,26 @@ public class VocabListFragment extends Fragment {
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVocabRecyclerView.setAdapter(new VocabAdapter(FileUtil.readCSV(getActivity())));
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.list_chapter_recycler_view, menu);
+
+        MenuItem flashcardItem = menu.findItem(R.id.flashcards);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.flashcards) {
+            Intent intent = new Intent(getActivity(), FlashcardPagerActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else {
+            return onOptionsItemSelected(item);
+        }
     }
 
     private class VocabHolder extends RecyclerView.ViewHolder {

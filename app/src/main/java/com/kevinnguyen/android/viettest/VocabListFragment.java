@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -24,7 +26,9 @@ public class VocabListFragment extends Fragment {
     private TextToSpeech mTextToSpeech;
     private String mTextTitle;
     private TextView mTextViewTitle;
+    private List<Vocabulary> mVocab;
     private static final String TAG = "VocabListFragment";
+    public static final String VOCAB_LIST = "vocabList";
 
     public static VocabListFragment newInstance() {
         return new VocabListFragment();
@@ -62,7 +66,8 @@ public class VocabListFragment extends Fragment {
         mTextViewTitle.setText(mTextTitle);
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mVocabRecyclerView.setAdapter(new VocabAdapter(FileUtil.readCSV(getActivity())));
+        mVocab = FileUtil.readCSV(getActivity());
+        mVocabRecyclerView.setAdapter(new VocabAdapter(mVocab));
         return view;
     }
 
@@ -78,6 +83,7 @@ public class VocabListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.flashcards) {
             Intent intent = new Intent(getActivity(), FlashcardPagerActivity.class);
+            intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
             startActivity(intent);
             return true;
         }

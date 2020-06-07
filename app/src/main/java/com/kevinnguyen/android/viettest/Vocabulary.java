@@ -1,6 +1,8 @@
 package com.kevinnguyen.android.viettest;
 
-public class Vocabulary {
+import java.io.Serializable;
+
+public class Vocabulary implements Serializable {
     private String mWord;
     private String mTranslation;
 

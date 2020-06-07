@@ -4,12 +4,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
@@ -44,7 +42,7 @@ public class FlashcardFragment extends Fragment {
         mVocabCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                YoYo.with(Techniques.FlipInX)
+                YoYo.with(Techniques.FlipInY)
                         .playOn(v);
                 if(onWord) {
                     mVocabWord.setText(mVocab.getTranslation());

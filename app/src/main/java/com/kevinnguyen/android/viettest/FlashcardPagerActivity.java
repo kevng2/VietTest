@@ -1,8 +1,6 @@
 package com.kevinnguyen.android.viettest;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
-
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +16,7 @@ public class FlashcardPagerActivity extends AppCompatActivity {
     private static final String TAG = "FlashcardPagerActivity";
     private ViewPager2 mViewPager;
     private List<Vocabulary> mVocabList;
+    private TextView mFlashcardPosition;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,7 +24,7 @@ public class FlashcardPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flashcard_pager);
 
         mVocabList = (ArrayList<Vocabulary>) getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST);
-
+        mFlashcardPosition = findViewById(R.id.flashcard_position);
         mViewPager = findViewById(R.id.flashcard_view_pager);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -33,12 +32,21 @@ public class FlashcardPagerActivity extends AppCompatActivity {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
+                mFlashcardPosition.setText(getString(R.string.flashcard_position_fraction, position + 1, mVocabList.size()));
                 return FlashcardFragment.newInstance(mVocabList.get(position));
             }
 
             @Override
             public int getItemCount() {
                 return mVocabList.size();
+            }
+        });
+
+        mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                mFlashcardPosition.setText(getString(R.string.flashcard_position_fraction, position + 1, mVocabList.size()));
             }
         });
     }

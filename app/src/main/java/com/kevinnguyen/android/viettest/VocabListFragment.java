@@ -23,7 +23,7 @@ import java.util.Locale;
 
 public class VocabListFragment extends Fragment {
     private RecyclerView mVocabRecyclerView;
-    private TextToSpeech mTextToSpeech;
+    private TextToSpeechUtil mTextToSpeech;
     private String mTextTitle;
     private TextView mTextViewTitle;
     private List<Vocabulary> mVocab;
@@ -40,14 +40,7 @@ public class VocabListFragment extends Fragment {
         setHasOptionsMenu(true);
         mTextTitle = getArguments().getString(ChapterFragment.CHAPTER_TITLE);
         Log.d(TAG, "onCreate: " + mTextTitle);
-        mTextToSpeech = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if(status != TextToSpeech.ERROR) {
-                    mTextToSpeech.setLanguage(new Locale("vi_VN"));
-                }
-            }
-        });
+        mTextToSpeech = new TextToSpeechUtil(getActivity());
     }
 
     @Override
@@ -106,7 +99,7 @@ public class VocabListFragment extends Fragment {
             mSoundButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    speak();
+                    mTextToSpeech.speak(mVocabText.getText().toString());
                 }
             });
         }
@@ -115,11 +108,6 @@ public class VocabListFragment extends Fragment {
             mVocabText.setText(vocabulary.getWord());
             mTranslation.setText(vocabulary.getTranslation());
             mSoundButton.setImageDrawable(getContext().getResources().getDrawable(R.drawable.ic_sound));
-        }
-
-        public void speak() {
-            String toSpeak = mVocabText.getText().toString();
-            mTextToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
         }
     }
 

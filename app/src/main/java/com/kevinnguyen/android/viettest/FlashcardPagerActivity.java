@@ -23,7 +23,8 @@ public class FlashcardPagerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_pager);
 
-        mVocabList = (ArrayList<Vocabulary>) getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST);
+        mVocabList = (ArrayList<Vocabulary>)
+                getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST);
         mFlashcardPosition = findViewById(R.id.flashcard_position);
         mViewPager = findViewById(R.id.flashcard_view_pager);
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -32,7 +33,8 @@ public class FlashcardPagerActivity extends AppCompatActivity {
             @NonNull
             @Override
             public Fragment createFragment(int position) {
-                mFlashcardPosition.setText(getString(R.string.flashcard_position_fraction, position + 1, mVocabList.size()));
+                mFlashcardPosition.setText(getString(R.string.flashcard_position_fraction,
+                        position + 1, mVocabList.size()));
                 return FlashcardFragment.newInstance(mVocabList.get(position));
             }
 
@@ -46,7 +48,8 @@ public class FlashcardPagerActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                mFlashcardPosition.setText(getString(R.string.flashcard_position_fraction, position + 1, mVocabList.size()));
+                mFlashcardPosition.setText(getString(R.string.flashcard_position_fraction,
+                        position + 1, mVocabList.size()));
             }
         });
     }

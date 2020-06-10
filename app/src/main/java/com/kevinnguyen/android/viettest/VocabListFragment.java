@@ -1,7 +1,6 @@
 package com.kevinnguyen.android.viettest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,22 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class VocabListFragment extends Fragment {
     private RecyclerView mVocabRecyclerView;
     private TextToSpeechUtil mTextToSpeech;
     private String mTextTitle;
-    private TextView mTextViewTitle;
     private List<Vocabulary> mVocab;
+    private Toolbar mToolbar;
     private static final String TAG = "VocabListFragment";
     public static final String VOCAB_LIST = "vocabList";
 
@@ -53,10 +53,10 @@ public class VocabListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: " + mTextTitle);
         View view = inflater.inflate(R.layout.list_vocab_recycler_view, container, false);
-        mTextViewTitle = view.findViewById(R.id.chapter_list_title);
-        mTextViewTitle.setText(mTextTitle);
+        mToolbar = view.findViewById(R.id.list_toolbar);
+        mToolbar.setTitle(mTextTitle);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVocab = FileUtil.readCSV(getActivity());

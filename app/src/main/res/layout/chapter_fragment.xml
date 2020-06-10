@@ -6,7 +6,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/chapter_card_view">
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         app:cardCornerRadius="5dp"

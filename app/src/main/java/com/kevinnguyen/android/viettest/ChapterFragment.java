@@ -4,9 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -78,7 +75,7 @@ public class ChapterFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            YoYo.YoYoString animation = YoYo.with(Techniques.Pulse)
+            YoYo.with(Techniques.Pulse)
                     .duration(200)
                     .playOn(mCardView);
 

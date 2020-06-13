@@ -2,18 +2,12 @@ package com.kevinnguyen.android.viettest;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -48,25 +42,6 @@ public class FlashcardFragment extends Fragment {
         setHasOptionsMenu(true);
         Log.d(TAG, "onCreate");
         mTextToSpeech = new TextToSpeechUtil(getActivity());
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        Log.d(TAG, "onCreateOptionsMenu");
-        inflater.inflate(R.menu.activity_flashcard_pager, menu);
-        MenuItem menuItem = menu.findItem(R.id.shuffle);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.menu.activity_flashcard_pager) {
-            Toast.makeText(getActivity(), "Big boi", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        else {
-            return super.onOptionsItemSelected(item);
-        }
     }
 
     @Override

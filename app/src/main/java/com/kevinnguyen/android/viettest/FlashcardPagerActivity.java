@@ -4,6 +4,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -22,7 +23,8 @@ public class FlashcardPagerActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_pager);
-
+        Toolbar toolbar = findViewById(R.id.flashcard_toolbar);
+        setSupportActionBar(toolbar);
         mVocabList = (ArrayList<Vocabulary>)
                 getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST);
         mFlashcardPosition = findViewById(R.id.flashcard_position);

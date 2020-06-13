@@ -1,4 +1,5 @@
 package com.kevinnguyen.android.viettest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -79,7 +80,12 @@ public class FlashcardPagerActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.shuffle) {
             Collections.shuffle(mVocabList);
-            //mFlashcardAdapter.notifyDataSetChanged();
+
+            // restarts the activity
+            Intent intent = getIntent();
+            finish();
+            startActivity(intent);
+
             return true;
         }
         return super.onOptionsItemSelected(item);

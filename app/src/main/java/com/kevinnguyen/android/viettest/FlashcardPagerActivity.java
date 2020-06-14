@@ -2,8 +2,6 @@ package com.kevinnguyen.android.viettest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -15,12 +13,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
 
 public class FlashcardPagerActivity extends AppCompatActivity {
     private static final String TAG = "FlashcardPagerActivity";

@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".VocabListActivity" />
         <activity android:name=".FlashcardPagerActivity"/>
+        <activity android:name=".TypingActivity" />
     </application>
 
 </manifest>

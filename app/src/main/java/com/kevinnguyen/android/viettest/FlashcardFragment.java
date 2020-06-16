@@ -14,7 +14,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-
 import java.util.Locale;
 
 public class FlashcardFragment extends Fragment {

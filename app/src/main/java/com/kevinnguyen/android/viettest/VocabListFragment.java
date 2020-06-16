@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,6 +27,7 @@ public class VocabListFragment extends Fragment {
     private String mTextTitle;
     private List<Vocabulary> mVocab;
     private Toolbar mToolbar;
+    private CardView mTyping;
     private static final String TAG = "VocabListFragment";
     public static final String VOCAB_LIST = "vocabList";
 
@@ -60,6 +62,17 @@ public class VocabListFragment extends Fragment {
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVocab = FileUtil.readCSV(getActivity());
         mVocabRecyclerView.setAdapter(new VocabAdapter(mVocab));
+
+        mTyping = view.findViewById(R.id.typing_card);
+        mTyping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), TypingActivity.class);
+                intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>)mVocab);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 

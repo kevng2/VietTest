@@ -28,6 +28,7 @@ public class VocabListFragment extends Fragment {
     private List<Vocabulary> mVocab;
     private Toolbar mToolbar;
     private CardView mTyping;
+    private CardView mFlashcards;
     private static final String TAG = "VocabListFragment";
     public static final String VOCAB_LIST = "vocabList";
 
@@ -69,6 +70,16 @@ public class VocabListFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), TypingActivity.class);
                 intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>)mVocab);
+                startActivity(intent);
+            }
+        });
+
+        mFlashcards = view.findViewById(R.id.flashcard_card);
+        mFlashcards.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FlashcardPagerActivity.class);
+                intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
                 startActivity(intent);
             }
         });

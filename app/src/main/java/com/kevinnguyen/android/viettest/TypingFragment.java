@@ -1,4 +1,5 @@
 package com.kevinnguyen.android.viettest;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,7 +40,7 @@ public class TypingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.typing_fragment, container, false);
+        final View v = inflater.inflate(R.layout.typing_fragment, container, false);
         mVocab = v.findViewById(R.id.typing_vocab);
 
         int number = mRandom.nextInt(mVocabList.size());
@@ -56,12 +57,23 @@ public class TypingFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.toString().equals(mRandomWord)) {
-                    Toast.makeText(getActivity(), "Correct!", Toast.LENGTH_SHORT).show();
-                    int n = mRandom.nextInt(mVocabList.size());
-                    mRandomWord = mVocabList.get(n).getWord();
-                    mVocab.setText(mRandomWord);
-                    Log.d(TAG, "onTextChanged: " + mVocab.getText());
-                    mTypingViet.getText().clear();
+                    mVocab.setTextColor(Color.GREEN);
+
+                    YoYo.with(Techniques.Pulse)
+                            .duration(400)
+                            .playOn(mVocab);
+
+                    v.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            int n = mRandom.nextInt(mVocabList.size());
+                            mRandomWord = mVocabList.get(n).getWord();
+                            mVocab.setText(mRandomWord);
+                            mVocab.setTextColor(Color.BLACK);
+                            Log.d(TAG, "onTextChanged: " + mVocab.getText());
+                            mTypingViet.getText().clear();
+                        }
+                    }, 400);
                 }
             }
 

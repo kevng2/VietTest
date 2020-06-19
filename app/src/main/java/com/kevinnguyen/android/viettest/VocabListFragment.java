@@ -3,9 +3,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -85,27 +82,6 @@ public class VocabListFragment extends Fragment {
         });
 
         return view;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.list_chapter_recycler_view, menu);
-
-        MenuItem flashcardItem = menu.findItem(R.id.flashcards);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.flashcards) {
-            Intent intent = new Intent(getActivity(), FlashcardPagerActivity.class);
-            intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
-            startActivity(intent);
-            return true;
-        }
-        else {
-            return onOptionsItemSelected(item);
-        }
     }
 
     private class VocabHolder extends RecyclerView.ViewHolder {

@@ -11,7 +11,7 @@ public class TypingActivity extends SingleFragmentActivity {
         Bundle args = new Bundle();
         args.putSerializable(VocabListFragment.VOCAB_LIST,
                 getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST));
-        TypingFragment typingFragment = new TypingFragment();
+        TypingFragment typingFragment = TypingFragment.newInstance();
         typingFragment.setArguments(args);
         return typingFragment;
     }

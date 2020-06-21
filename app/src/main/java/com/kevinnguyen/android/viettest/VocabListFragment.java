@@ -1,8 +1,12 @@
 package com.kevinnguyen.android.viettest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -26,6 +30,7 @@ public class VocabListFragment extends Fragment {
     private Toolbar mToolbar;
     private CardView mTyping;
     private CardView mFlashcards;
+    private TextView mTypingText;
     private static final String TAG = "VocabListFragment";
     public static final String VOCAB_LIST = "vocabList";
 
@@ -48,6 +53,7 @@ public class VocabListFragment extends Fragment {
         mTextToSpeech.shutdown();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -55,13 +61,37 @@ public class VocabListFragment extends Fragment {
         View view = inflater.inflate(R.layout.list_vocab_recycler_view, container, false);
         mToolbar = view.findViewById(R.id.list_toolbar);
         mToolbar.setTitle(mTextTitle);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);
+
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        activity.setSupportActionBar(mToolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVocab = FileUtil.readCSV(getActivity());
         mVocabRecyclerView.setAdapter(new VocabAdapter(mVocab));
 
         mTyping = view.findViewById(R.id.typing_card);
+
+
+        mTyping.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() ==  MotionEvent.ACTION_DOWN) {
+                    Log.d(TAG, "onTouch: Action Down");
+                }
+                else if(event.getAction() == MotionEvent.ACTION_UP) {
+                    Log.d(TAG, "onTouch: Starting Activity");
+                    Intent intent = new Intent(getActivity(), TypingActivity.class);
+                    intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
+                    startActivity(intent);
+                }
+                return true;
+            }
+        });
+
+        /*
         mTyping.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,7 +100,9 @@ public class VocabListFragment extends Fragment {
                 startActivity(intent);
             }
         });
+         */
 
+        mTypingText = view.findViewById(R.id.typing_text);
         mFlashcards = view.findViewById(R.id.flashcard_card);
         mFlashcards.setOnClickListener(new View.OnClickListener() {
             @Override

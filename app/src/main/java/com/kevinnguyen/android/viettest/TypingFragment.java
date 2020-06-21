@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -22,6 +24,7 @@ public class TypingFragment extends Fragment {
     private static final String TAG = "TypingFragment";
     private TextView mVocab;
     private EditText mTypingViet;
+    private Toolbar mToolbar;
     private List<Vocabulary> mVocabList;
     private Random mRandom;
     private String mRandomWord;
@@ -42,6 +45,13 @@ public class TypingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.typing_fragment, container, false);
         mVocab = v.findViewById(R.id.typing_vocab);
+
+        mToolbar = v.findViewById(R.id.typing_toolbar);
+        AppCompatActivity activity = (AppCompatActivity)getActivity();
+        assert activity != null;
+        activity.setSupportActionBar(mToolbar);
+        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         int number = mRandom.nextInt(mVocabList.size());
         mRandomWord = mVocabList.get(number).getWord();

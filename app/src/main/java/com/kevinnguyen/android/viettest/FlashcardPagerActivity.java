@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class FlashcardPagerActivity extends AppCompatActivity {
     private static final String TAG = "FlashcardPagerActivity";
@@ -30,8 +31,11 @@ public class FlashcardPagerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flashcard_pager);
         invalidateOptionsMenu();
         Log.d(TAG, "onCreate: ");
+
         Toolbar toolbar = findViewById(R.id.flashcard_toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.inflateMenu(R.menu.activity_flashcard_pager);
 
         mVocabList = (ArrayList<Vocabulary>)
@@ -84,5 +88,11 @@ public class FlashcardPagerActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

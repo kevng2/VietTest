@@ -13,13 +13,14 @@ public class TextToSpeechUtil {
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
                     mTextToSpeech.setLanguage(new Locale("vi_VN"));
+                    mTextToSpeech.setSpeechRate(.5f);
                 }
             }
         });
     }
 
     public void speak(String word) {
-        mTextToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+        mTextToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
     public void shutdown() {

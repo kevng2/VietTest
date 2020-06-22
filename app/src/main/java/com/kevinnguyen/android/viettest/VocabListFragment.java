@@ -31,6 +31,7 @@ public class VocabListFragment extends Fragment {
     private CardView mTyping;
     private CardView mFlashcards;
     private TextView mTypingText;
+    private TextView mFlashcardText;
     private static final String TAG = "VocabListFragment";
     public static final String VOCAB_LIST = "vocabList";
 
@@ -73,16 +74,20 @@ public class VocabListFragment extends Fragment {
         mVocabRecyclerView.setAdapter(new VocabAdapter(mVocab));
 
         mTyping = view.findViewById(R.id.typing_card);
-
-
+        mTypingText = view.findViewById(R.id.typing_text);
         mTyping.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(event.getAction() ==  MotionEvent.ACTION_DOWN) {
                     Log.d(TAG, "onTouch: Action Down");
+                    mTypingText.setTextColor(Color.RED);
+                }
+                else if(event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    mTypingText.setTextColor(Color.BLACK);
                 }
                 else if(event.getAction() == MotionEvent.ACTION_UP) {
                     Log.d(TAG, "onTouch: Starting Activity");
+                    mTypingText.setTextColor(Color.BLACK);
                     Intent intent = new Intent(getActivity(), TypingActivity.class);
                     intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
                     startActivity(intent);
@@ -91,28 +96,27 @@ public class VocabListFragment extends Fragment {
             }
         });
 
-        /*
-        mTyping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TypingActivity.class);
-                intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>)mVocab);
-                startActivity(intent);
-            }
-        });
-         */
-
         mTypingText = view.findViewById(R.id.typing_text);
         mFlashcards = view.findViewById(R.id.flashcard_card);
-        mFlashcards.setOnClickListener(new View.OnClickListener() {
+        mFlashcardText = view.findViewById(R.id.flashcard_text);
+        mFlashcards.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), FlashcardPagerActivity.class);
-                intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
-                startActivity(intent);
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() ==  MotionEvent.ACTION_DOWN) {
+                    mFlashcardText.setTextColor(Color.RED);
+                }
+                else if(event.getAction() == MotionEvent.ACTION_CANCEL) {
+                    mFlashcardText.setTextColor(Color.BLACK);
+                }
+                else if(event.getAction() == MotionEvent.ACTION_UP) {
+                    mFlashcardText.setTextColor(Color.BLACK);
+                    Intent intent = new Intent(getActivity(), FlashcardPagerActivity.class);
+                    intent.putExtra(VOCAB_LIST, (ArrayList<Vocabulary>) mVocab);
+                    startActivity(intent);
+                }
+                return true;
             }
         });
-
         return view;
     }
 

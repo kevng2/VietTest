@@ -1,8 +1,13 @@
 package com.kevinnguyen.android.viettest;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;
@@ -43,7 +47,6 @@ public class FlashcardPagerActivity extends AppCompatActivity {
 
         mFlashcardPosition = findViewById(R.id.flashcard_position);
         mViewPager = findViewById(R.id.flashcard_view_pager);
-        FragmentManager fragmentManager = getSupportFragmentManager();
         mFlashcardAdapter = new FlashcardAdapter(this);
         mViewPager.setAdapter(mFlashcardAdapter);
         mViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -92,6 +95,7 @@ public class FlashcardPagerActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        Log.d(TAG, "onNavigateUp: ");
         onBackPressed();
         return true;
     }

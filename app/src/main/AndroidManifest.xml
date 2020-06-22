@@ -17,8 +17,10 @@
         </activity>
         <activity android:name=".VocabListActivity"
             android:parentActivityName=".VietTestActivity"/>
+
         <activity android:name=".FlashcardPagerActivity"
             android:parentActivityName=".VocabListActivity"/>
+
         <activity android:name=".TypingActivity"
             android:parentActivityName=".VocabListActivity"/>
     </application>

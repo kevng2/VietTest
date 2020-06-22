@@ -35,63 +35,65 @@
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:columnCount="2"
-                android:rowCount="1"
+                android:layout_marginTop="8dp"
                 android:layout_weight="8"
+                android:columnCount="2"
                 android:padding="8dp"
+                android:rowCount="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_height="0dp"
-                    android:layout_width="0dp"
                     android:id="@+id/typing_card"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="4dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1">
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/typing_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/typing_text"
                             android:gravity="center"
-                            android:text="@string/improve_at_typing" />
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="@string/improve_at_typing"
+                            android:textSize="18sp" />
                     </LinearLayout>
-
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/flashcard_card"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
-                    app:cardElevation="8dp"
-                    app:cardCornerRadius="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1">
-
+                    android:layout_marginBottom="8dp"
+                    app:cardElevation="8dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-
                         <TextView
+                            android:id="@+id/flashcard_text"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="@string/flashcards" />
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"
+                            android:text="@string/flashcards"
+                            android:textSize="18sp" />
                     </LinearLayout>
-
                 </androidx.cardview.widget.CardView>
             </GridLayout>
 

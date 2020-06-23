@@ -12,17 +12,19 @@
         <activity android:name=".VietTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".VocabListActivity"
-            android:parentActivityName=".VietTestActivity"/>
-
-        <activity android:name=".FlashcardPagerActivity"
+        <activity
+            android:name=".VocabListActivity"
+            android:parentActivityName=".VietTestActivity" />
+        <activity
+            android:name=".FlashcardPagerActivity"
             android:parentActivityName=".VocabListActivity"/>
-
-        <activity android:name=".TypingActivity"
-            android:parentActivityName=".VocabListActivity"/>
+        <activity
+            android:name=".TypingActivity"
+            android:parentActivityName=".VocabListActivity" />
     </application>
 
 </manifest>

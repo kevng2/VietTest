@@ -1,13 +1,10 @@
 package com.kevinnguyen.android.viettest;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +17,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class FlashcardPagerActivity extends AppCompatActivity {
     private static final String TAG = "FlashcardPagerActivity";
@@ -33,14 +29,8 @@ public class FlashcardPagerActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_pager);
-        invalidateOptionsMenu();
-        Log.d(TAG, "onCreate: ");
 
-        Toolbar toolbar = findViewById(R.id.flashcard_toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.inflateMenu(R.menu.activity_flashcard_pager);
+
 
         mVocabList = (ArrayList<Vocabulary>)
                 getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST);
@@ -57,6 +47,13 @@ public class FlashcardPagerActivity extends AppCompatActivity {
                         position + 1, mVocabList.size()));
             }
         });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.flashcard_toolbar);
+        //toolbar.inflateMenu(R.menu.activity_flashcard_pager);
+        setSupportActionBar(toolbar);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     public class FlashcardAdapter extends FragmentStateAdapter {
@@ -79,7 +76,16 @@ public class FlashcardPagerActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        Log.d(TAG, "onCreateOptionsMenu: Here is the menu!");
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_flashcard_pager, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected: Up Button Clicked");
         if(item.getItemId() == R.id.shuffle) {
             Collections.shuffle(mVocabList);
 
@@ -87,10 +93,11 @@ public class FlashcardPagerActivity extends AppCompatActivity {
             Intent intent = getIntent();
             finish();
             startActivity(intent);
-
             return true;
         }
-        return super.onOptionsItemSelected(item);
+        else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

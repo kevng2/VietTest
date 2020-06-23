@@ -64,9 +64,13 @@ public class VocabListFragment extends Fragment {
         mToolbar.setTitle(mTextTitle);
 
         AppCompatActivity activity = (AppCompatActivity)getActivity();
-        activity.setSupportActionBar(mToolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        if(activity != null) {
+            activity.setSupportActionBar(mToolbar);
+            if(activity.getSupportActionBar() != null) {
+                activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
 
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

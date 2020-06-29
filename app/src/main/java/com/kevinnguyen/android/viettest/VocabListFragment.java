@@ -1,6 +1,5 @@
 package com.kevinnguyen.android.viettest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -63,6 +62,9 @@ public class VocabListFragment extends Fragment {
         mToolbar = view.findViewById(R.id.list_toolbar);
         mToolbar.setTitle(mTextTitle);
 
+        mVocab = FileUtil.readCSV(getContext(), getArguments().getInt(
+                ChapterFragment.CHAPTER_NUMBER) + 1);
+
         AppCompatActivity activity = (AppCompatActivity)getActivity();
 
         if(activity != null) {
@@ -74,7 +76,6 @@ public class VocabListFragment extends Fragment {
 
         mVocabRecyclerView = view.findViewById(R.id.viet_recycler_view);
         mVocabRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mVocab = FileUtil.readCSV(getActivity());
         mVocabRecyclerView.setAdapter(new VocabAdapter(mVocab));
 
         mTyping = view.findViewById(R.id.typing_card);

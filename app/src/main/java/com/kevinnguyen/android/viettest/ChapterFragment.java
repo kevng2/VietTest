@@ -23,9 +23,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChapterFragment extends Fragment {
+    private static final String TAG = "ChapterFragment";
     private RecyclerView mRecyclerView;
     private Toolbar mToolbar;
-    public static final String CHAPTER_TITLE = "requestChapterNumber";
+    public static final String CHAPTER_TITLE = "chapter_title";
+    public static final String CHAPTER_NUMBER = "chapter_number";
 
     public static Fragment newInstance() {
         return new ChapterFragment();
@@ -50,10 +52,10 @@ public class ChapterFragment extends Fragment {
     }
 
     private class ChapterHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private static final String TAG = "ChapterHolder";
         private ImageView mImageView;
         private TextView mChapterTitle;
         private CardView mCardView;
+        private int mChapterNumber;
 
         public ChapterHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.chapter_fragment, parent, false));
@@ -75,6 +77,7 @@ public class ChapterFragment extends Fragment {
             Glide.with(getActivity())
                     .load(image)
                     .into(mImageView);
+            mChapterNumber = chapter;
         }
 
         @Override
@@ -90,6 +93,8 @@ public class ChapterFragment extends Fragment {
                     Log.d(TAG, "Running run()");
                     Intent intent = new Intent(getActivity(), VocabListActivity.class);
                     intent.putExtra(CHAPTER_TITLE, mChapterTitle.getText().toString());
+                    Log.d(TAG, "run: " + getAdapterPosition());
+                    intent.putExtra(CHAPTER_NUMBER, getAdapterPosition());
                     startActivity(intent);
                 }
             }, 200);
@@ -102,7 +107,7 @@ public class ChapterFragment extends Fragment {
 
         public ChapterAdapter() {
             mChapter = new ArrayList<>(10);
-            for(int i = 0; i < 10; i++) {
+            for(int i = 0; i < 2; i++) {
                 mChapter.add(String.valueOf(i + 1));
                 Log.d(TAG, "ChapterAdapter: " + i);
             }

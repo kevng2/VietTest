@@ -29,12 +29,9 @@ public class FlashcardPagerActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashcard_pager);
-
-
-
+        Log.d(TAG, "onCreate: Creating Stuff");
         mVocabList = (ArrayList<Vocabulary>)
                 getIntent().getSerializableExtra(VocabListFragment.VOCAB_LIST);
-
         mFlashcardPosition = findViewById(R.id.flashcard_position);
         mViewPager = findViewById(R.id.flashcard_view_pager);
         mFlashcardAdapter = new FlashcardAdapter(this);
@@ -48,8 +45,8 @@ public class FlashcardPagerActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.flashcard_toolbar);
-        //toolbar.inflateMenu(R.menu.activity_flashcard_pager);
+        Toolbar toolbar = findViewById(R.id.flashcard_toolbar);
+        toolbar.inflateMenu(R.menu.activity_flashcard_pager);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,6 +74,7 @@ public class FlashcardPagerActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         Log.d(TAG, "onCreateOptionsMenu: Here is the menu!");
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_flashcard_pager, menu);
@@ -98,12 +96,5 @@ public class FlashcardPagerActivity extends AppCompatActivity {
         else {
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        Log.d(TAG, "onNavigateUp: ");
-        onBackPressed();
-        return true;
     }
 }

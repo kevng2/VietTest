@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import java.util.Objects;
 
 public class ChapterFragment extends Fragment {
     private RecyclerView mRecyclerView;
+    private Toolbar mToolbar;
     public static final String CHAPTER_TITLE = "requestChapterNumber";
 
     public static Fragment newInstance() {
@@ -39,6 +41,8 @@ public class ChapterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.list_chapter_recycler_view, container, false);
+        mToolbar = view.findViewById(R.id.chapter_toolbar);
+        mToolbar.setTitle("Home");
         mRecyclerView = view.findViewById(R.id.chapter_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(new ChapterAdapter());
@@ -95,7 +99,6 @@ public class ChapterFragment extends Fragment {
     private class ChapterAdapter extends RecyclerView.Adapter<ChapterHolder> {
         private static final String TAG = "ChapterAdapter";
         List<String> mChapter;
-        private CardView mCardView;
 
         public ChapterAdapter() {
             mChapter = new ArrayList<>(10);

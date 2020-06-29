@@ -5,14 +5,10 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:theme="@style/AppTheme"
-        app:title="Home" />
+    <include
+        layout="@layout/custom_toolbar"
+        android:id="@+id/chapter_toolbar"
+        app:title="Home"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chapter_recycler_view"

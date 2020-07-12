@@ -24,4 +24,7 @@
     <string name="improve_at_typing">Improve at Typing</string>
     <string name="flashcards">Flashcards</string>
     <string name="typing_hint">Type word here</string>
+    <string name="chapters">Chapters</string>
+    <string name="text_to_speech">Text-to-Speech</string>
+    <string name="enter_word_here">Enter word here</string>
 </resources>

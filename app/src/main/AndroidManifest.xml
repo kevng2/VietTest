@@ -9,19 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".VietTestActivity">
+        <activity android:name=".TextToSpeechActivity"/>
+        <activity android:name=".OptionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".VietTestActivity">
+        </activity>
         <activity
             android:name=".VocabListActivity"
             android:parentActivityName=".VietTestActivity" />
         <activity
             android:name=".FlashcardPagerActivity"
-            android:parentActivityName=".VocabListActivity"/>
+            android:parentActivityName=".VocabListActivity" />
         <activity
             android:name=".TypingActivity"
             android:parentActivityName=".VocabListActivity" />
